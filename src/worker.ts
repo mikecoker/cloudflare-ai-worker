@@ -358,7 +358,13 @@ async function summarizeEOClaude(text: string, env: Env): Promise<string> {
 				content: [
 					{
 						type: 'text',
-						text: `Please provide a summary of this executive order in markdown format. Don't repeat the title or document number. Focus on the main purpose, key provisions, identify affected groups and potential impact on those groups. Keep the summary clear and accessible to a general audience. Use markdown headings, lists, and other formatting to make the summary easy to read.\n\nExecutive Order text:\n${text}`,
+						text: `Don't repeat the title or document number.Please provide a summary of this executive order \
+						in markdown format. Focus on the main purpose, key provisions, identify affected groups and potential \
+						impact on those groups. Keep the summary clear and accessible to a general audience. Use markdown headings, \
+						lists, and other formatting to make the summary easy to read. Include at least 5 Frequently Asked Questions \
+						with with bolded text and bullet points but do not add Q and A to the questions. Answers should be bulleted \
+						on a new line, indented and italicized. \
+						\n\nExecutive Order text:\n${text}`,
 					},
 				],
 			},
