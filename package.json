@@ -1,0 +1,37 @@
+{
+	"name": "executive-orders-app",
+	"private": true,
+	"version": "1.0.0",
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"dev:worker": "wrangler dev",
+		"build": "tsc && vite build",
+		"build:worker": "wrangler build",
+		"build:all": "npm run build && npm run build:worker",
+		"deploy": "wrangler deploy",
+		"preview": "vite preview"
+	},
+	"dependencies": {
+		"@cloudflare/kv-asset-handler": "^0.3.0",
+		"hono": "^4.7.2",
+		"pdf-text-reader": "^5.1.0",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"react-markdown": "^10.0.0",
+		"remark-gfm": "^4.0.1"
+	},
+	"devDependencies": {
+		"@cloudflare/workers-types": "^4.20240208.0",
+		"@tailwindcss/typography": "^0.5.16",
+		"@types/react": "^18.2.0",
+		"@types/react-dom": "^18.2.0",
+		"@vitejs/plugin-react": "^4.2.0",
+		"autoprefixer": "^10.4.20",
+		"postcss": "^8.5.3",
+		"tailwindcss": "^3.4.17",
+		"typescript": "^5.2.2",
+		"vite": "^5.0.0",
+		"wrangler": "^3.22.1"
+	}
+}
