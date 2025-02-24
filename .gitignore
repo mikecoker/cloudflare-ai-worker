@@ -1,5 +1,4 @@
 # Logs
-
 logs
 _.log
 npm-debug.log_
@@ -156,6 +155,7 @@ dist
 
 # Stores VSCode versions used for testing VSCode extensions
 
+.vscode/settings.json
 .vscode-test
 
 # yarn v2
@@ -170,3 +170,4 @@ dist
 
 .dev.vars
 .wrangler/
+
