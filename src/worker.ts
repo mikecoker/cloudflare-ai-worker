@@ -96,7 +96,13 @@ app.use('*', async (c, next) => {
 
 // API Routes
 app.get('/api/cache', async (c) => {
-	await updateCache(c.env);
+	// await updateCache(c.env);
+	// return c.json({ message: 'Cache updated' }, 200, {
+	// 	'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+	// 	Pragma: 'no-cache',
+	// 	Expires: '0',
+	// 	'Surrogate-Control': 'no-store',
+	// });
 	return c.json({ message: 'Cache updated' }, 200, {
 		'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
 		Pragma: 'no-cache',
@@ -160,61 +166,62 @@ app.get('/api/order/:documentNumber', async (c) => {
 });
 
 app.post('/api/regenerate-summary/:documentNumber', async (c) => {
-	const documentNumber = c.req.param('documentNumber');
+	// const documentNumber = c.req.param('documentNumber');
 
-	try {
-		const orderJson = await c.env.EXECUTIVE_ORDERS_CACHE.get('orders');
-		if (!orderJson) {
-			throw new Error('Order not found in KV store');
-		}
+	// try {
+	// 	const orderJson = await c.env.EXECUTIVE_ORDERS_CACHE.get('orders');
+	// 	if (!orderJson) {
+	// 		throw new Error('Order not found in KV store');
+	// 	}
 
-		const orderData = JSON.parse(orderJson);
-		const order = orderData.orders.find((o: any) => o.document_number === documentNumber);
-		if (!order) {
-			throw new Error('Order not found in KV store');
-		}
+	// 	const orderData = JSON.parse(orderJson);
+	// 	const order = orderData.orders.find((o: any) => o.document_number === documentNumber);
+	// 	if (!order) {
+	// 		throw new Error('Order not found in KV store');
+	// 	}
 
-		const rawTextResponse = await fetch(order.raw_text_url);
-		if (!rawTextResponse.ok) {
-			throw new Error('Failed to fetch raw text');
-		}
-		const rawText = await rawTextResponse.text();
+	// 	const rawTextResponse = await fetch(order.raw_text_url);
+	// 	if (!rawTextResponse.ok) {
+	// 		throw new Error('Failed to fetch raw text');
+	// 	}
+	// 	const rawText = await rawTextResponse.text();
 
-		const newSummary = await summarizeEO(rawText, c.env);
-		if (!newSummary) {
-			throw new Error('Failed to generate new summary');
-		}
+	// 	const newSummary = await summarizeEO(rawText, c.env);
+	// 	if (!newSummary) {
+	// 		throw new Error('Failed to generate new summary');
+	// 	}
 
-		const summaryKey = `summary:${documentNumber}`;
-		await c.env.EXECUTIVE_ORDERS_CACHE.put(summaryKey, newSummary);
-		return c.json(
-			{
-				...order,
-				ai_summary: {
-					content: newSummary,
-					format: 'markdown',
-				},
-				summaryKey: summaryKey,
-				timestamp: Date.now(),
-			},
-			undefined,
-			{
-				'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
-				Pragma: 'no-cache',
-				Expires: '0',
-				'Surrogate-Control': 'no-store',
-			}
-		);
-	} catch (error) {
-		console.error('Error regenerating summary:', error);
-		return c.json(
-			{
-				error: 'Failed to regenerate summary',
-				details: error instanceof Error ? error.message : String(error),
-			},
-			500
-		);
-	}
+	// 	const summaryKey = `summary:${documentNumber}`;
+	// 	await c.env.EXECUTIVE_ORDERS_CACHE.put(summaryKey, newSummary);
+	// 	return c.json(
+	// 		{
+	// 			...order,
+	// 			ai_summary: {
+	// 				content: newSummary,
+	// 				format: 'markdown',
+	// 			},
+	// 			summaryKey: summaryKey,
+	// 			timestamp: Date.now(),
+	// 		},
+	// 		undefined,
+	// 		{
+	// 			'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+	// 			Pragma: 'no-cache',
+	// 			Expires: '0',
+	// 			'Surrogate-Control': 'no-store',
+	// 		}
+	// 	);
+	// } catch (error) {
+	// 	console.error('Error regenerating summary:', error);
+	// 	return c.json(
+	// 		{
+	// 			error: 'Failed to regenerate summary',
+	// 			details: error instanceof Error ? error.message : String(error),
+	// 		},
+	// 		500
+	// 	);
+	// }
+	return c.json({ message: 'disabled' }, 200);
 });
 
 // Static asset handling
