@@ -23,7 +23,7 @@ export default function App() {
 	const [selectedOrder, setSelectedOrder] = useState<ExecutiveOrder | null>(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
-	const [isRegenerating, setIsRegenerating] = useState(false);
+	//const [isRegenerating, setIsRegenerating] = useState(false);
 
 	useEffect(() => {
 		fetchOrders();
@@ -131,31 +131,31 @@ export default function App() {
 	};
 
 	// Add a function to handle regeneration
-	const regenerateAISummary = async (documentNumber: string) => {
-		try {
-			setIsRegenerating(true);
-			// Replace this URL with your actual API endpoint
-			const response = await fetch(`/api/regenerate-summary/${documentNumber}`, {
-				method: 'POST',
-				headers: {
-					'Cache-Control': 'no-cache, no-store, must-revalidate',
-					'Pragma': 'no-cache',
-					'Expires': '0',
-				},
-			});
+	// const regenerateAISummary = async (documentNumber: string) => {
+	// 	try {
+	// 		setIsRegenerating(true);
+	// 		// Replace this URL with your actual API endpoint
+	// 		const response = await fetch(`/api/regenerate-summary/${documentNumber}`, {
+	// 			method: 'POST',
+	// 			headers: {
+	// 				'Cache-Control': 'no-cache, no-store, must-revalidate',
+	// 				'Pragma': 'no-cache',
+	// 				'Expires': '0',
+	// 			},
+	// 		});
 
-			if (!response.ok) {
-				throw new Error('Failed to regenerate summary');
-			}
+	// 		if (!response.ok) {
+	// 			throw new Error('Failed to regenerate summary');
+	// 		}
 
-			// Fetch the updated order details to get the new summary
-			await fetchOrderDetails(documentNumber);
-		} catch (error) {
-			console.error('Error regenerating summary:', error);
-		} finally {
-			setIsRegenerating(false);
-		}
-	};
+	// 		// Fetch the updated order details to get the new summary
+	// 		await fetchOrderDetails(documentNumber);
+	// 	} catch (error) {
+	// 		console.error('Error regenerating summary:', error);
+	// 	} finally {
+	// 		setIsRegenerating(false);
+	// 	}
+	// };
 
 	function OrderSummary({ summary }: { summary: AISummary | string }) {
 		// Handle old string format
@@ -284,7 +284,7 @@ export default function App() {
 									</div>
 								</div>
 
-								<div className="mt-6 pt-6 border-t border-slate-200">
+								{/* <div className="mt-6 pt-6 border-t border-slate-200">
 									{selectedOrder && (
 										<button
 											onClick={() => regenerateAISummary(selectedOrder.document_number)}
@@ -315,7 +315,7 @@ export default function App() {
 											)}
 										</button>
 									)}
-								</div>
+								</div> */}
 							</div>
 						</div>
 					) : (

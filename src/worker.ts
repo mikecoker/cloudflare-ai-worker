@@ -19,7 +19,7 @@ interface Env {
 const MAX_CONCURRENT_REQUESTS = 5;
 const RETRY_DELAY_MS = 60000; // 1 minute
 const MAX_RETRIES = 3;
-const PER_PAGE = 50;
+const PER_PAGE = 150;
 const AI_MODEL = '@cf/meta/llama-3.2-3b-instruct';
 const AI_USE_CF = true;
 
@@ -280,7 +280,7 @@ async function fetchExecutiveOrders(): Promise<ExecutiveOrder[]> {
 
 	// Add other parameters
 	params.append('per_page', `${PER_PAGE}`);
-	params.append('conditions[publication_date][gte]', '2017-01-20');
+	params.append('conditions[publication_date][gte]', '2025-01-20');
 	params.append('conditions[publication_date][lte]', today);
 	params.append('conditions[presidential_document_type][]', 'executive_order');
 
